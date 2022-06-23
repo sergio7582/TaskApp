@@ -37,6 +37,11 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Screens\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Screens\Home.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
