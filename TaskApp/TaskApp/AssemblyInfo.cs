@@ -1,3 +1,4 @@
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -5,4 +6,8 @@ using Xamarin.Forms.Xaml;
 
 [assembly: ExportFont("CaveatBrush-Regular.ttf", Alias = "Cavea")]
 [assembly: ExportFont("fontello.ttf", Alias = "icons")]
+[assembly: ExportFont("AveriaGruesaLibre-Regular.ttf", Alias = "Cavea2")]
+
 [assembly: ExportFont("AlegreyaSans-Regular.ttf", Alias = "AlegreRegular")]
+
+

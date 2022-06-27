@@ -10,11 +10,11 @@ namespace TaskApp
     public partial class App : Application
     {
         static SQLiteHelper db;
+        public static MasterDetailPage MasterDet { get; set; }
         public App()
         {
             InitializeComponent();
-                
-            MainPage = new NavigationPage(new Home());
+            MainPage = new MainPage();
         }
         public static SQLiteHelper SQLiteDB
         {

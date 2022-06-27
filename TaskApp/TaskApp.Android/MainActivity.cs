@@ -18,6 +18,8 @@ namespace TaskApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App());
+
+            Window.SetStatusBarColor(Android.Graphics.Color.Argb(100,57,93,100));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

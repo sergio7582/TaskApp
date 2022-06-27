@@ -11,69 +11,23 @@ using Xamarin.Forms.Xaml;
 namespace TaskApp.Screens
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Home : ContentPage
+    public partial class AddTask : ContentPage
     {
-        public Home()
-        {            
+        public AddTask(string idCategoria)
+        {
+            
             InitializeComponent();
             lstTasks.RefreshCommand = new Command(() =>
             {
                 OnAppearing();
             });
         }
-        public void OpenMenu(object sender, EventArgs e)
+        private void OpenMenu(object sender,EventArgs e)
         {
             App.MasterDet.IsPresented = true;
         }
         public async void TermineTask(object sender, EventArgs e)
         {
-
-            bool isComplete = await DisplayAlert("Confirmación", "¿Ya terminaste la tarea?", "Si", "No");
-
-            var mi = ((Button)sender);
-            var alumnoList = await App.SQLiteDB.GetTasksById(Convert.ToInt32(mi.CommandParameter));
-            if (isComplete)
-            {
-
-                alumnoList.IsComplete = true ;
-
-                await App.SQLiteDB.SaveTaskAsync(alumnoList);
-
-                lstTasks.ItemsSource = null;
-                OnAppearing();
-                var options = new SnackBarOptions
-                {
-                    MessageOptions = new MessageOptions
-                    {
-                        Foreground = Color.White,
-                        Message = "Tarea " + alumnoList.Title.ToString() + " terminada"
-                    },
-                    BackgroundColor = Color.FromHex("#258eee"),
-                    CornerRadius = 10,
-                    IsRtl = true,
-                    Duration = TimeSpan.FromSeconds(3)
-                };
-                await this.DisplaySnackBarAsync(options);
-
-
-            }
-            else
-            {
-                var options = new SnackBarOptions
-                {
-                    MessageOptions = new MessageOptions
-                    {
-                        Foreground = Color.White,
-                        Message = "Tarea " + alumnoList.Title.ToString() + " no eliminada"
-                    },
-                    BackgroundColor = Color.FromHex("#258eee"),
-                    CornerRadius = 10,
-                    IsRtl = true,
-                    Duration = TimeSpan.FromSeconds(3)
-                };
-                await this.DisplaySnackBarAsync(options);
-            }
-
 
         }
         protected override async void OnAppearing()
@@ -96,7 +50,7 @@ namespace TaskApp.Screens
                         MessageOptions = new MessageOptions
                         {
                             Foreground = Color.White,
-                            Message = "No tienes ninguna tarea pendiente :)"                            
+                            Message = "No tienes ninguna tarea pendiente :)"
                         },
                         BackgroundColor = Color.FromHex("#258eee"),
                         CornerRadius = 10,
