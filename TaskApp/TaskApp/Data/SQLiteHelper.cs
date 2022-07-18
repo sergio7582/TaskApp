@@ -14,6 +14,7 @@ namespace TaskApp.Data
         {
             db = new SQLiteAsyncConnection(dbPath);
             db.CreateTableAsync<Tareas>().Wait();
+            db.CreateTableAsync<Categorys>().Wait();
         }
 
         public Task<int> SaveTaskAsync(Tareas task)
@@ -27,18 +28,61 @@ namespace TaskApp.Data
                 return db.UpdateAsync(task);
             }
         }        
-        public Task<List<Tareas>> GetTasksToCompleteOrNo(bool IsComplete,string resultDate)
+        public Task<List<Tareas>> GetTasksToCompleteOrNo(bool IsComplete,string resultDate,int category)
         {
-            return db.Table<Tareas>().Where(a => a.IsComplete == IsComplete && a.Date != resultDate).ToListAsync();
-        }
-
-        public Task<List<Tareas>> GetTasksUrgents(string date)
-        {
-            return db.Table<Tareas>().Where(a => a.IsComplete == false && a.Date == date).ToListAsync();
+            return db.Table<Tareas>().Where
+                (a => a.IsComplete == IsComplete && 
+                Convert.ToDateTime(a.Date) >= Convert.ToDateTime(resultDate) 
+                && a.idCategory == category).ToListAsync();
         }
         public Task<Tareas> GetTasksById(int IdTask)
         {
             return db.Table<Tareas>().Where(a => a.IdTarea == IdTask).FirstOrDefaultAsync();
         }
+        public Task<List<Tareas>> GetTaskByDay(string resultDate)
+        {            
+            return db.Table<Tareas>().Where(a => a.IsComplete == false && a.Date == resultDate).ToListAsync();
+        }
+        public Task<List<Tareas>> GetTaskByTomorrow(string resultDate)
+        {
+            return db.Table<Tareas>().Where(a => a.IsComplete == false && Convert.ToDateTime(a.Date) >= Convert.ToDateTime(resultDate)).ToListAsync();
+        }
+
+        public Task<List<Tareas>> GetTasksByIdCategory(int idCategory)
+        {
+            return db.Table<Tareas>().Where(a => a.idCategory == idCategory).ToListAsync();
+        }
+
+
+
+
+        public Task<List<Categorys>> GetCategorysAsync()
+        {
+            return db.Table<Categorys>().ToListAsync();
+        }
+        public Task<Categorys> GetCategorysById(int IdCategory)
+        {
+            return db.Table<Categorys>().Where(a => a.IdCategory == IdCategory).FirstOrDefaultAsync();
+        }
+        public Task<int> SaveCategoryAsync(Categorys categorys)
+        {
+            if (categorys.IdCategory == 0)
+            {
+                return db.InsertAsync(categorys);
+            }
+            else
+            {
+                return db.UpdateAsync(categorys);
+            }
+        }
+
+        public async Task<bool> DeleteCategory(int idCategory)
+        {
+            db.Table<Categorys>().DeleteAsync(a => a.IdCategory == idCategory).Wait();
+            return true;
+        }
+
+
+
     }
 }

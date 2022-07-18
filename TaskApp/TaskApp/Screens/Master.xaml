@@ -10,77 +10,88 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0,1">
-                <GradientStop Color="#EAE075" Offset="0.1"/>
-                <GradientStop Color="#C0B85E" Offset="1.0"/>
+                <GradientStop Color="#150E51" Offset="0.1"/>
+                <GradientStop Color="#302B63" Offset="0.5"/>
+                <GradientStop Color="#24243E" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <StackLayout Margin="10">
             <Grid ColumnDefinitions="50,*">
-                <Button Grid.Column="0" WidthRequest="30" 
-                        BackgroundColor="Transparent"
-                        Clicked="GoToHome"
-                        TextColor="Black" 
-                        Text="&#xE82A;" FontSize="30" FontFamily="icons"/>
+                
                 <ffsvg:SvgCachedImage HorizontalOptions="End"                                         
                                       Grid.Column="1"  
-                                      WidthRequest="60"
-                                      HeightRequest="60"
+                                      WidthRequest="40"
+                                      HeightRequest="40"
                                         VerticalOptions="Center"
-                                        Source="logo.svg"/>
+                                        Source="logo2.svg"/>
             </Grid>
+
+            
+            
+            <ListView Margin="10,25,10,10" x:Name="lstCategorys" HasUnevenRows="true"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="False"
+                  SelectionMode="None"
+                  HorizontalScrollBarVisibility="Always"
+                  SeparatorVisibility="Default"  
+                      SeparatorColor="Black"
+                  >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <ToolbarItem CommandParameter="{Binding IdCategory}" Clicked="DeleteCategory" Text="Borrar"/>
+                            </ViewCell.ContextActions>
+                            <StackLayout>
+                                <Button Text="{Binding Name}" Margin="0,5,0,0"                                         
+                                        FontSize="20" 
+                                        Padding="0" 
+                                        FontFamily="Cavea2"
+                                        FontAttributes="Bold"                                        
+                                        BackgroundColor="{StaticResource btnBg}"
+                                        CornerRadius="5"                                        
+                                        CommandParameter="{Binding IdCategory}" 
+                                        Clicked="GoToHome" TextColor="Black" 
+                                         />
+                            </StackLayout>
+                                
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
            
 
-
-            <Label Text="Categorias"                         
-                        VerticalOptions="Start" 
-                        TextColor="Black" 
-                        FontFamily="Cavea2" 
-                        FontSize="25"/>
-
-            <Grid VerticalOptions="FillAndExpand" ColumnDefinitions="3*,*" RowDefinitions="Auto">
-                
-                <Button Text="Trabajo" 
-                        Margin="10,0,0,0"
-                        FontSize="25"                        
-                        FontFamily="Cavea2"
-                        HorizontalOptions="Start"
-                        BackgroundColor="Transparent" 
-                        Clicked="GoToAddTask"
-                        TextColor="Black"
-                        Grid.Row="0" 
-                        Grid.Column="0" />
-                <Label  Grid.Column="1"
-                        FontSize="20"
-                        Margin="0,0,10,0"
-                        Grid.Row="0" 
-                        VerticalOptions="Center"
-                        HorizontalOptions="End" 
-                        TextColor="Black"
-                        Text="2"/>
-            </Grid>
+           
+          
             
-            <StackLayout Margin="0,0,0,10" x:Name="btnAdd" IsVisible="false">
-                <Button Text="Agregar" 
-                    WidthRequest="200"
-                    HeightRequest="40" 
-                    HorizontalOptions="Center"                     
+            <StackLayout Margin="0,0,0,10" x:Name="btnAdd" IsVisible="true">
+                <Button Text="&#xE83A;" 
+                    
+                    HorizontalOptions="End"                     
                     TextColor="White"
-                    FontSize="20"
-                    FontFamily="Cavea2"
-                    BackgroundColor="#000" 
+                    FontSize="30"
+                    FontFamily="icons"
+                    Clicked="SeeForm"
+                    FontAttributes="Bold"                    
+                    BackgroundColor="Transparent" 
                     CornerRadius="10"/>
             </StackLayout>
 
-            <StackLayout x:Name="NewCategory" IsVisible="True">
-                <Grid Margin="0,0,0,20" ColumnDefinitions="3.9*,*">
-                    <Frame Grid.ColumnSpan="2" CornerRadius="8" BackgroundColor="#497881" />
-                    <Entry  Grid.Column="0" Placeholder="Titulo" TextColor="White" Margin="10" 
-                            PlaceholderColor="White" />
+            <StackLayout x:Name="NewCategory" IsVisible="false">
+                <Grid Margin="0,0,0,10" ColumnDefinitions="4*,*">
+                    <Frame Grid.ColumnSpan="2" CornerRadius="5" HeightRequest="45" BackgroundColor="#C8C8F1" />
+                    <Entry  Grid.Column="0" x:Name="titleCategory" Text="" Placeholder="Titulo" TextColor="Black" Margin="10" 
+                            PlaceholderColor="Black"/>
                     <Button Grid.Column="1" 
                             FontFamily="icons" 
-                            Text="&#xE80E;"
+                            Text="&#xE831;"
                             TextColor="White"
-                            FontSize="36" 
+                            FontSize="30"
+                            Margin="0,0,0,7"
+                            Clicked="CreateCategory"
+                            VerticalOptions="End"
                             BackgroundColor="Transparent"/>
 
                 </Grid>

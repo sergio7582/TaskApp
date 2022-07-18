@@ -12,12 +12,14 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0,1">
-                <GradientStop Color="#487780" Offset="0.1"/>
-                <GradientStop Color="#AFBAC0" Offset="1.0"/>
+                <GradientStop Color="#150E51" Offset="0.1"/>
+                <GradientStop Color="#302B63" Offset="0.5"/>
+                <GradientStop Color="#24243E" Offset="1"/>
+                
             </LinearGradientBrush>
         </Grid.Background>
         <StackLayout>
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" Margin="0,0,0,30">
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" Margin="0,0,0,15">
                 <Button Text="&#xF0C9;" 
                     Grid.Row="0"
                     Grid.Column="0"
@@ -31,14 +33,13 @@
                     HorizontalOptions="Start" 
                     VerticalOptions="Start"/>
                 
-                <Label FontSize="30" Grid.Row="1" Grid.Column="0" Margin="12,0,0,0" TextColor="White" FontFamily="Cavea2"  Text="Bienvenido Sergio"/>
+                <Label FontSize="23" Grid.Row="1" Grid.Column="0" Margin="12,0,0,0" TextColor="White" FontAttributes="Bold"  Text="Bienvenido Sergio"/>
                 
                 <ffsvg:SvgCachedImage Margin="10" 
                                       Grid.RowSpan="2"
                                       Grid.Column="1"
                                       HorizontalOptions="End"                                         
-                                WidthRequest="70"
-                                
+                                WidthRequest="50"                                
                                 Source="logo2.svg"/>
                
             </Grid>
@@ -49,44 +50,39 @@
                   IsPullToRefreshEnabled="true"
                   IsRefreshing="False"
                   SelectionMode="None"
-                  HorizontalScrollBarVisibility="Always"
-                  SeparatorColor="Black"
-                      
-                  >
+                  SeparatorVisibility="None"
+                  SeparatorColor="Black">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            
                             <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
-                                
-                                <BoxView xct:ShadowEffect.Color="Black"
-                                            xct:ShadowEffect.OffsetY="7"
-                                            xct:ShadowEffect.Radius="1" 
-                                            Margin="0,0,0,5"
-                                            Grid.RowSpan="2"
-                                            Grid.ColumnSpan="2" CornerRadius="10"                                               
-                                         BackgroundColor="{StaticResource btnBg}"
-                                         >
+                                <BoxView Margin="0,0,0,2"
+                                         Grid.RowSpan="2"
+                                         Grid.ColumnSpan="2" CornerRadius="6"                                               
+                                         BackgroundColor="{StaticResource btnBg}">
                                 </BoxView>
                                 <Label Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" Text="Categoria" 
-                                       FontFamily="Cavea2" FontSize="18" />
-                                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" FontFamily="Cavea" TextColor="Black" FontSize="30" VerticalOptions="Center" FontAttributes="Bold" Text="{Binding Title}"/>
-                                <Button Grid.RowSpan="2" Grid.Column="1" Text="&#xE830;" 
+                                       FontFamily="Cavea2" FontSize="15" />
+                                <Label Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" FontFamily="Cavea2" TextColor="Black" FontSize="20" VerticalOptions="Center" Text="{Binding Title}"/>
+                                <Button Grid.RowSpan="2" Grid.Column="1" 
                                         CommandParameter="{Binding IdTarea}" 
                                         Clicked="TermineTask" 
-                                        FontSize="35" 
+                                        HeightRequest="25"
+                                        WidthRequest="25"
+                                        Margin="0,0,15,0"
+                                        BorderColor="Gray"
+                                        CornerRadius="13"
+                                        BorderWidth="1"
                                         HorizontalOptions="End" 
                                         VerticalOptions="Center" 
-                                        BackgroundColor="Transparent" 
+                                        BackgroundColor="White"
+                                        
                                         TextColor="Black" FontFamily="icons" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-            
-
         </StackLayout>
         
        

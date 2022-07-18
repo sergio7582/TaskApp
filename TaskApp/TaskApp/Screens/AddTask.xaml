@@ -7,12 +7,13 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0,1">
-                <GradientStop Color="#487780" Offset="0.1"/>
-                <GradientStop Color="#AFBAC0" Offset="1.0"/>
+                <GradientStop Color="#150E51" Offset="0.1"/>
+                <GradientStop Color="#302B63" Offset="0.5"/>
+                <GradientStop Color="#24243E" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <StackLayout>
-        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" Margin="0,0,0,30">
+        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" Margin="0,0,0,15">
             <Button Text="&#xF0C9;" 
                     Grid.Row="0"
                     Grid.Column="0"
@@ -26,16 +27,17 @@
                     HorizontalOptions="Start" 
                     VerticalOptions="Start"/>
 
-            <Label FontSize="30" Grid.Row="1" 
+            <Label FontSize="23" Grid.Row="1" 
                    Grid.Column="0" Margin="12,0,0,0" 
-                   TextColor="White" FontFamily="Cavea2" 
-                   Text="Trabajo"/>
+                   TextColor="White" FontAttributes="Bold"
+                   Text=""
+                   x:Name="Title"/>
 
             <ffsvg:SvgCachedImage Margin="10" 
                                       Grid.RowSpan="2"
                                       Grid.Column="1"
                                       HorizontalOptions="End"                                         
-                                WidthRequest="70"
+                                WidthRequest="50"
                                 
                                 Source="logo2.svg"/>
 
@@ -46,32 +48,36 @@
                   IsRefreshing="False"
                   SelectionMode="None"
                   HorizontalScrollBarVisibility="Always"
-                  SeparatorColor="Black"
+                  SeparatorVisibility="None"
                       
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
 
-                        <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+                        <Grid RowDefinitions="*" ColumnDefinitions="*,*">
 
-                            <Frame 
-                                            Margin="0,0,0,5"
-                                            Grid.RowSpan="2"
-                                            Grid.ColumnSpan="2" CornerRadius="10"                                               
-                                         BackgroundColor="{StaticResource btnBg}"
-                                         >
-                            </Frame>
-                            <Label Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" Text="Categoria" 
-                                       FontFamily="Cavea2" FontSize="18" />
-                            <Label Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" FontFamily="Cavea" TextColor="Black" FontSize="30" VerticalOptions="Center" FontAttributes="Bold" Text="{Binding Title}"/>
-                            <Button Grid.RowSpan="2" Grid.Column="1" Text="&#xE830;" 
+                                    <Frame 
+                                Margin="0,0,0,5"
+                                Grid.Row="0"
+                                Grid.ColumnSpan="2" CornerRadius="7"                                               
+                                BackgroundColor="{StaticResource btnBg}"
+                                >
+                                    </Frame>
+                            
+                            <Label Grid.Row="0" Grid.Column="0" Margin="5,5,0,8" FontFamily="Cavea2" TextColor="Black" FontSize="20" VerticalOptions="Center" FontAttributes="Bold" Text="{Binding Tarea}"/>
+                            <Button Grid.Row="0"  Grid.Column="1" 
                                         CommandParameter="{Binding IdTarea}" 
                                         Clicked="TermineTask" 
-                                        FontSize="35" 
+                                        HeightRequest="25"
+                                        WidthRequest="25"
+                                        BorderColor="Black"
+                                        BorderWidth="1"
+                                        CornerRadius="13"
+                                        Margin="0,0,15,0"
                                         HorizontalOptions="End" 
                                         VerticalOptions="Center" 
-                                        BackgroundColor="Transparent" 
+                                        BackgroundColor="#fff" 
                                         TextColor="Black" FontFamily="icons" />
                         </Grid>
                     </ViewCell>
@@ -79,28 +85,65 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid RowDefinitions="*,*" Padding="10" Margin="10" ColumnDefinitions="3.6*,*" VerticalOptions="End">
+        <Grid RowDefinitions="*,*" Padding="10" Margin="10,0,3,0" ColumnDefinitions="4*,*" VerticalOptions="End">
             
             <Frame Grid.RowSpan="2" Grid.ColumnSpan="2" 
-                   BackgroundColor="#497881"
-                   Opacity="0"
-                   CornerRadius="10"
+                   BackgroundColor="#C8C8F1"
                    
+                   x:Name="bgFrame"
+                   CornerRadius="10"
+                   TranslationX="450"
                    />
-            <Entry Placeholder="Titulo" Opacity="0" FontSize="25" FontFamily="Cavea2" Grid.Column="0" TextColor="White" PlaceholderColor="White" Margin="10,0,0,0" Grid.Row="0" />
+            <Entry Placeholder="Titulo" 
+                   
+                   FontSize="25" 
+                   TranslationX="450"
+                   x:Name="txtTitle"
+                   FontFamily="Cavea2" 
+                   Grid.Column="0" 
+                   TextColor="Black" PlaceholderColor="Black" Margin="10,0,0,0" Grid.Row="0" />
+            
             <DatePicker Grid.Row="1" Margin="10,0,0,0" 
                         FontFamily="Cavea2"
                         FontSize="25"
-                        TextColor="White" Grid.Column="0" 
-                        Opacity="0"/>
-            
-            <Button Text="&#xE828;"
-                    FontFamily="icons" FontSize="45" Grid.RowSpan="2"
+                        TranslationX="450"
+                        x:Name="txtDate"                        
+                        TextColor="Black" 
+                        Grid.Column="0" 
+                        />
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    HorizontalOptions="End"
                     VerticalOptions="Center"
-                    
-                    CornerRadius="40"
-                    Padding="0"
-                    TextColor="#497881" BackgroundColor="White" Grid.Column="1" />
+                    TranslationX="450"
+                    WidthRequest="40"
+                   
+                    Clicked="CreateTask"
+                    x:Name="btnOk"
+                    CornerRadius="20"
+                    Margin="5"
+                    TextColor="Black"
+                    BackgroundColor="Transparent"
+                    FontSize="28"
+                    Text="&#xE82D;"
+                    FontFamily="icons"/>
+
+            <Button Text="&#xE823;"
+                    x:Name="btnAdd"
+                    FontFamily="icons" 
+                    VerticalOptions="End"                    
+                    Grid.Row="1"
+                    FontSize="40"        
+                    Opacity="1"
+                    Padding="0,3,0,0"
+                    HorizontalOptions="End"
+                    Grid.Column="1"                   
+                    HeightRequest="45"
+                    WidthRequest="45"
+                    CornerRadius="25"                    
+                    TextColor="#fff"                     
+                    Clicked="SeeForm"
+                    BackgroundColor="Transparent"  />
         </Grid>
        </Grid>
     </StackLayout>
